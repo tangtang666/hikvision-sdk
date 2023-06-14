@@ -134,7 +134,7 @@ func (c *Client) Get(u *url.URL) ([]byte, error) {
 // Put executes a HTTP PUT request.
 func (c *Client) Put(u *url.URL, contentType string, data []byte) ([]byte, error) {
 	b := bytes.NewBuffer(data)
-	req, err := http.NewRequest("GET", u.String(), b)
+	req, err := http.NewRequest("PUT", u.String(), b)
 	if err != nil {
 		return nil, err
 	}
