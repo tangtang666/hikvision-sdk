@@ -142,6 +142,15 @@ func (c *Client) Put(u *url.URL, contentType string, data []byte) ([]byte, error
 	return c.Do(req)
 }
 
+// Delete  executes a HTTP DELETE request.
+func (c *Client) Delete(u *url.URL) ([]byte, error) {
+	req, err := http.NewRequest("DELETE", u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+	return c.Do(req)
+}
+
 // PutXML executes a HTTP PUT request with `application/xml` content type.
 func (c *Client) PutXML(u *url.URL, data interface{}) ([]byte, error) {
 	b, err := xml.Marshal(data)
