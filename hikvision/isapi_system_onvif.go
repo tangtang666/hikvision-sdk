@@ -79,7 +79,7 @@ func (c *Client) EnableOnvif() (resp *ResponseStatus, err error) {
 	return resp, nil
 }
 
-func (c *Client) CloseOnvif() (resp *ResponseStatus, err error) {
+func (c *Client) DisableOnvif() (resp *ResponseStatus, err error) {
 	path := "/ISAPI/System/Network/Integrate"
 	u, err := url.Parse(c.BaseURL + path)
 	if err != nil {
