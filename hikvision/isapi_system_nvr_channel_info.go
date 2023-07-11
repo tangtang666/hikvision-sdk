@@ -7,18 +7,15 @@ import (
 
 type InputProxyChannelList struct {
 	XMLName           xml.Name `xml:"InputProxyChannelList"`
-	Text              string   `xml:",chardata"`
 	Version           string   `xml:"version,attr"`
 	Xmlns             string   `xml:"xmlns,attr"`
 	Size              string   `xml:"size,attr"`
 	InputProxyChannel []struct {
-		Text                      string `xml:",chardata"`
 		Version                   string `xml:"version,attr"`
 		Xmlns                     string `xml:"xmlns,attr"`
 		ID                        string `xml:"id"`
 		Name                      string `xml:"name"`
 		SourceInputPortDescriptor struct {
-			Text                 string `xml:",chardata"`
 			ProxyProtocol        string `xml:"proxyProtocol"`
 			AddressingFormatType string `xml:"addressingFormatType"`
 			IpAddress            string `xml:"ipAddress"`
