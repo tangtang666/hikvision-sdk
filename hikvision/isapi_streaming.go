@@ -6,6 +6,32 @@ import (
 	"net/url"
 )
 
+type Video struct {
+	Enabled                 string `xml:"enabled"`
+	VideoInputChannelID     int    `xml:"videoInputChannelID"`
+	VideoCodecType          string `xml:"videoCodecType"`
+	VideoScanType           string `xml:"videoScanType"`
+	VideoResolutionWidth    int    `xml:"videoResolutionWidth"`
+	VideoResolutionHeight   int    `xml:"videoResolutionHeight"`
+	VideoQualityControlType string `xml:"videoQualityControlType"`
+	ConstantBitRate         int    `xml:"constantBitRate"`
+	FixedQuality            string `xml:"fixedQuality"`
+	VbrUpperCap             string `xml:"vbrUpperCap"`
+	VbrLowerCap             string `xml:"vbrLowerCap"`
+	MaxFrameRate            int    `xml:"maxFrameRate"`
+	KeyFrameInterval        int    `xml:"keyFrameInterval"`
+	SnapShotImageType       string `xml:"snapShotImageType"`
+	GovLength               string `xml:"GovLength"`
+	SVC                     struct {
+		Enabled string `xml:"enabled"`
+	} `xml:"SVC"`
+	PacketType  []string `xml:"PacketType"`
+	Smoothing   string   `xml:"smoothing"`
+	H265Profile string   `xml:"H265Profile"`
+	SmartCodec  struct {
+		Enabled string `xml:"enabled"`
+	} `xml:"SmartCodec"`
+}
 type StreamingChannel struct {
 	XMLName     xml.Name `xml:"StreamingChannel"`
 	Version     string   `xml:"version,attr"`
@@ -39,32 +65,7 @@ type StreamingChannel struct {
 			CertificateType string `xml:"certificateType"`
 		} `xml:"Security"`
 	} `xml:"Transport"`
-	Video struct {
-		Enabled                 string `xml:"enabled"`
-		VideoInputChannelID     string `xml:"videoInputChannelID"`
-		VideoCodecType          string `xml:"videoCodecType"`
-		VideoScanType           string `xml:"videoScanType"`
-		VideoResolutionWidth    string `xml:"videoResolutionWidth"`
-		VideoResolutionHeight   string `xml:"videoResolutionHeight"`
-		VideoQualityControlType string `xml:"videoQualityControlType"`
-		ConstantBitRate         string `xml:"constantBitRate"`
-		FixedQuality            string `xml:"fixedQuality"`
-		VbrUpperCap             string `xml:"vbrUpperCap"`
-		VbrLowerCap             string `xml:"vbrLowerCap"`
-		MaxFrameRate            string `xml:"maxFrameRate"`
-		KeyFrameInterval        string `xml:"keyFrameInterval"`
-		SnapShotImageType       string `xml:"snapShotImageType"`
-		GovLength               string `xml:"GovLength"`
-		SVC                     struct {
-			Enabled string `xml:"enabled"`
-		} `xml:"SVC"`
-		PacketType  []string `xml:"PacketType"`
-		Smoothing   string   `xml:"smoothing"`
-		H265Profile string   `xml:"H265Profile"`
-		SmartCodec  struct {
-			Enabled string `xml:"enabled"`
-		} `xml:"SmartCodec"`
-	} `xml:"Video"`
+	Video Video `xml:"Video"`
 	Audio struct {
 		Enabled              string `xml:"enabled"`
 		AudioInputChannelID  string `xml:"audioInputChannelID"`
