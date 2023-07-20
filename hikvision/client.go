@@ -90,6 +90,7 @@ func NewClient(host, username, password string) (*Client, error) {
 // Do executes a HTTP request.
 func (c *Client) Do(r *http.Request) ([]byte, error) {
 	// Send request
+
 	resp, err := c.Client.Do(r)
 	if err != nil {
 		return nil, err
@@ -101,7 +102,6 @@ func (c *Client) Do(r *http.Request) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	// Handle non-success HTTP responses
 	if resp.StatusCode != http.StatusOK {
 		e := ResponseStatus{}
@@ -128,6 +128,17 @@ func (c *Client) Get(u *url.URL) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	return c.Do(req)
+}
+
+// Post executes a HTTP PUT request.
+func (c *Client) Post(u *url.URL, contentType string, data []byte) ([]byte, error) {
+	b := bytes.NewBuffer(data)
+	req, err := http.NewRequest("POST", u.String(), b)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", contentType)
 	return c.Do(req)
 }
 
@@ -167,4 +178,16 @@ func (c *Client) PutJSON(u *url.URL, contentType string, data interface{}) ([]by
 		return nil, err
 	}
 	return c.Put(u, contentTypeJSON, b)
+}
+
+// PostXML executes a HTTP PUT request with `application/xml` content type.
+func (c *Client) PostXML(u *url.URL, data interface{}) ([]byte, error) {
+	b, err := xml.Marshal(data)
+	// Add the XML declaration manually
+	//b = append([]byte(xml.Header), b...)
+	//fmt.Println("s", string(b))
+	if err != nil {
+		return nil, err
+	}
+	return c.Post(u, contentTypeXML, b)
 }
